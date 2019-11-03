@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class Player : Character
 {
-    void Start() {
+    protected override void Start() {
+        base.Start();
     }
 
    protected override void Update() {
@@ -15,7 +16,6 @@ public class Player : Character
     private void GetInput() {
         direction = Vector2.zero;
         if (Input.GetAxisRaw("Vertical") > 0) {
-            Debug.Log(Input.GetAxis("Vertical"));
             direction += Vector2.up;
         }
         if (Input.GetAxisRaw("Vertical") < 0) {
