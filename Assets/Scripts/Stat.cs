@@ -6,6 +6,8 @@ using UnityEngine.UI;
 public class Stat : MonoBehaviour {
 
     private Image content;
+    [SerializeField]
+    private Text statValue;
     private float currentFill;
     private float currentValue;
     [SerializeField]
@@ -31,6 +33,8 @@ public class Stat : MonoBehaviour {
                 currentValue = 0;
             } else currentValue = value;
             currentFill = currentValue / MyMaxValue;    // uzyskanie wartości uzupełnienia w przedziale (0.0;1.0)
+            statValue.text = currentValue + " / " + MyMaxValue;
+
         }
     }
     void Start() {
