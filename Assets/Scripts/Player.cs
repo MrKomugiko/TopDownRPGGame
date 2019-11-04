@@ -10,6 +10,10 @@ public class Player : Character
     [SerializeField]
     private Stat mana;
     private float initMana = 200;
+
+    [SerializeField]
+    private GameObject[] spellPrefab;
+
     protected override void Start() {   // override -> nadpisanie funkcji od której sie dziedziczy (character)
         health.Initialize(initHealth, initHealth);  // przekazanie wartosci do klasy health ustawiajac ( aktualne zycie , maksymalne zycie )
         mana.Initialize(initMana, initMana);
@@ -46,18 +50,22 @@ public class Player : Character
             direction += Vector2.left;
         }
         if (Input.GetKeyDown(KeyCode.Space)) {
-            attackRoutine = StartCoroutine(Attack());
+            if (!isAttacking && !isMoving) { // jezeli nie atakujemy i nie ruszamy sie mozemy castowac zaklecie
+                attackRoutine = StartCoroutine(Attack());
+            }
         }
     }
 
     private IEnumerator Attack() {
-        if (!isAttacking && !isMoving) { // jezeli nie atakujemy i nie ruszamy sie mozemy castowac zaklecie
             isAttacking = true;
             myAnimator.SetBool("attack", isAttacking);
-            yield return new WaitForSeconds(3); // hardcoded cast time for debugging purpose
-            Debug.Log("attack done");
+            yield return new WaitForSeconds(0.001f); // hardcoded cast time for debugging purpose
+            CastSpell();
             StopAttack();
-        }
+    }
+
+    public void CastSpell() {
+        Instantiate(spellPrefab[1], transform.position, Quaternion.identity);
     }
 
 
