@@ -39,6 +39,7 @@ public class Stat : MonoBehaviour {
     }
     void Start() {
         content = GetComponent<Image>(); // przypisanie obrazku do zmiennej content
+        
     }
     void Update() {
         if(currentFill != content.fillAmount) { // sprawdzenie czy zmienna currentFill różni się od poziomu napełnienia w obrazku
@@ -50,5 +51,6 @@ public class Stat : MonoBehaviour {
         MyCurrentValue = currentValue;
     }
 
+    
 }
 
