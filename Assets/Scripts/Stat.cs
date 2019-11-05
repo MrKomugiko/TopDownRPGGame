@@ -12,9 +12,7 @@ public class Stat : MonoBehaviour {
     private float currentValue;
     [SerializeField]
     private float lerpSpeed; // prędkość uzupełniania
-
-
-
+    private string characterType; // player lub enemy
     public float MyMaxValue {
         get;
         set;
@@ -33,18 +31,19 @@ public class Stat : MonoBehaviour {
                 currentValue = 0;
             } else currentValue = value;
             currentFill = currentValue / MyMaxValue;    // uzyskanie wartości uzupełnienia w przedziale (0.0;1.0)
+
             statValue.text = currentValue + " / " + MyMaxValue;
 
         }
     }
     void Start() {
-        content = GetComponent<Image>(); // przypisanie obrazku do zmiennej content
-        
+
+            content = GetComponent<Image>(); // przypisanie obrazku do zmiennej conten
     }
     void Update() {
-        if(currentFill != content.fillAmount) { // sprawdzenie czy zmienna currentFill różni się od poziomu napełnienia w obrazku
-            content.fillAmount = Mathf.Lerp(content.fillAmount, currentFill, Time.deltaTime * lerpSpeed);   // zmiana poziomu napelnienia w obrazku w czasie ( ładowanie sie paska zamiast natychmiastowego zaniku )
-        }
+            if(currentFill != content.fillAmount) { // sprawdzenie czy zmienna currentFill różni się od poziomu napełnienia w obrazku
+                content.fillAmount = Mathf.Lerp(content.fillAmount, currentFill, Time.deltaTime * lerpSpeed);   // zmiana poziomu napelnienia w obrazku w czasie ( ładowanie sie paska zamiast natychmiastowego zaniku )
+            }
     }
     public void Initialize(float currentValue, float maxValue) { // funkcja inicjalizująca przypisująca wartości aktualnego wypełnienia i maksymalnego mozliwego wypelnienia
         MyMaxValue = maxValue;
