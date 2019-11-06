@@ -17,6 +17,11 @@ public class Player : Character
     private Spell spellInUse; // info jaki skill jest wybrany
     public int SpellInUse { get { return skillIndex;} set { value = skillIndex; } }
     private int skillIndex; // indeks skila w tablicy prefabu
+
+    public Spell SpellCurrentInUse() {
+        return spellInUse;
+    }
+
     protected override void Start() {   // override -> nadpisanie funkcji od której sie dziedziczy (character)
         health.Initialize(initHealth, initHealth);  // przekazanie wartosci do klasy health ustawiajac ( aktualne zycie , maksymalne zycie )
         mana.Initialize(initMana, initMana);
@@ -77,9 +82,6 @@ public class Player : Character
             skillIndex = 4;
         }
 
-
-
-
         if (Input.GetAxisRaw("Vertical") > 0) {
             direction += Vector2.up;
             lastDir = Vector2.up;
@@ -130,19 +132,13 @@ public class Player : Character
        // mySpell.SetManaCost(66.0f);
         mana.MyCurrentValue -= mySpell.getManaCost();
     }
+    //private bool InLineOfSight() {
 
+    //  //  Vector3 targetDirection = (target.transform.position - transform.position).normalized;
+    //  //  Debug.DrawRay(transform.position, targetDirection, Color.red);
 
-
-
-
-
-    private bool InLineOfSight() {
-
-      //  Vector3 targetDirection = (target.transform.position - transform.position).normalized;
-      //  Debug.DrawRay(transform.position, targetDirection, Color.red);
-
-        return false;
-    }
+    //    return false;
+    //}
 
 }
 

@@ -23,6 +23,5 @@ public class SkillsContainer : MonoBehaviour
             spell.color = Color.black;
         }
         spells[(int)spellIndex].color = Color.white;
-        Debug.Log(spellIndex.ToString());
     }
 }
