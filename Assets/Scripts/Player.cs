@@ -12,6 +12,7 @@ public class Player : Character
     private float initMana = 200;
     [SerializeField]
     private GameObject[] spellPrefab;
+    public int exp;
     private Transform target;
     [SerializeField]
     private Spell spellInUse; // info jaki skill jest wybrany
@@ -33,6 +34,7 @@ public class Player : Character
   }
    protected override void Update() {   //
         GetInput();
+        Debug.Log($"Posiadasz {exp} punktów doświadczenia.");
         //InLineOfSight();
         base.Update();
     }
@@ -127,6 +129,7 @@ public class Player : Character
         spell = Instantiate(spellPrefab[skillIndex], transform.position, Quaternion.identity);
         Spell mySpell = spell.GetComponent<Spell>();
         mySpell.Direction = lastDir;
+        mySpell.Caster = gameObject.GetComponent<Player>();
        // ustawianie na sztywno many skilla - wszystkich skilów w tym przypadku
        // TODO: automat, i przypisanie wybrnaemu indeksowi skila basic manycostu
        // mySpell.SetManaCost(66.0f);

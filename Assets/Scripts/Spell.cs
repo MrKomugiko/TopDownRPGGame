@@ -22,6 +22,10 @@ public class Spell : MonoBehaviour
     private float ManaCost;
     private bool hitTarget;
 
+    [SerializeField]
+    private Player caster;
+    public Player Caster { get { return caster; } set { caster = value; } }
+
     public float getManaCost() {
         return ManaCost;
     }

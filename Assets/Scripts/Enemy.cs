@@ -8,6 +8,7 @@ public class Enemy : MonoBehaviour
     private float spellDamage;
     [SerializeField]
     private int expPoints;
+    private Player attacker;
     public float HealthAmout { get; set; }
     // Start is called before the first frame update
     void Start()
@@ -23,10 +24,12 @@ public class Enemy : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision) {
         if (collision.CompareTag("Attack")) {
             spell = collision.GetComponent<Spell>();
+            attacker = spell.Caster;
             HealthAmout -= spell.Damage;
 
             if (HealthAmout <= 0) {
                 Destroy(gameObject);
+                attacker.exp += expPoints;
 
             }
             Debug.Log("Otrzymano " + spell.Damage + " obrazen");
