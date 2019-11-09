@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Player : Character
 {
@@ -11,8 +13,22 @@ public class Player : Character
     private Stat mana;
     private float initMana = 200;
     [SerializeField]
+    public int level;
+    private int Level {
+        get {
+            return level;
+        }
+        set {
+            level = value;
+        }
+    }
+    [SerializeField]
+    private Stat exp;
+    private float initExp = 100;
+    [SerializeField]
+    private TextMeshProUGUI LevelValue;
+    [SerializeField]
     private GameObject[] spellPrefab;
-    public int exp;
     private Transform target;
     [SerializeField]
     private Spell spellInUse; // info jaki skill jest wybrany
@@ -26,6 +42,8 @@ public class Player : Character
     protected override void Start() {   // override -> nadpisanie funkcji od której sie dziedziczy (character)
         health.Initialize(initHealth, initHealth);  // przekazanie wartosci do klasy health ustawiajac ( aktualne zycie , maksymalne zycie )
         mana.Initialize(initMana, initMana);
+        exp.Initialize(0f, initExp);
+        Level = 1;
         //for testing hardcode target
         //target = GameObject.Find("Target").transform;
         InvokeRepeating("ManaRegeneration", 0.5f, 0.5f);
@@ -34,7 +52,8 @@ public class Player : Character
   }
    protected override void Update() {   //
         GetInput();
-        Debug.Log($"Posiadasz {exp} punktów doświadczenia.");
+        
+        //Debug.Log($"Posiadasz {exp} punktów doświadczenia.");
         //InLineOfSight();
         base.Update();
     }
@@ -42,7 +61,17 @@ public class Player : Character
     private void ManaRegeneration() {
           mana.MyCurrentValue += 3f;
     }
+    public void ExpDistribution(float expPoints) {
+        exp.MyCurrentValue += expPoints;
+        Debug.Log($"Zdobyto {expPoints} expa. \n\t Gracz posiada {exp.MyCurrentValue}.");
 
+        if(exp.MyCurrentValue == exp.MyMaxValue) {
+            Level += 1;
+            exp.Initialize(0f, initExp+=50);
+            LevelValue.text = Level.ToString();
+            Debug.Log($"Gratulacja awansowałeś na {Level} poziom!");
+        }
+    }
     Vector2 lastDir;
     private void GetInput() {
         direction = Vector2.zero;
@@ -60,7 +89,7 @@ public class Player : Character
                         string name = spellInUse.name;
                         float damage = spellInUse.Damage;
                         float manaCost = spellInUse.getManaCost();
-                        Debug.Log("Skill: '"+name+"', Damage: '"+damage+"', Mana cost: '"+manaCost+"'.");
+                        //Debug.Log("Skill: '"+name+"', Damage: '"+damage+"', Mana cost: '"+manaCost+"'.");
                     }
 
         if (Input.GetKeyDown(KeyCode.Alpha1)){

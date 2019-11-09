@@ -48,6 +48,7 @@ public class Stat : MonoBehaviour {
     public void Initialize(float currentValue, float maxValue) { // funkcja inicjalizująca przypisująca wartości aktualnego wypełnienia i maksymalnego mozliwego wypelnienia
         MyMaxValue = maxValue;
         MyCurrentValue = currentValue;
-    }
+      //  Debug.Log(content.name + " zaostał zainicjalizowany pomyślnie.");
+    } 
 }
 

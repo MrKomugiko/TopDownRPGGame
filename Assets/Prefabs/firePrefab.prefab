@@ -118,9 +118,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 10
-  lifeTime: 1
-  Damage: 0.2
+  lifeTime: 2
+  Damage: 1
   ManaCost: 50
+  caster: {fileID: 0}
 --- !u!58 &4402811758125401475
 CircleCollider2D:
   m_ObjectHideFlags: 0

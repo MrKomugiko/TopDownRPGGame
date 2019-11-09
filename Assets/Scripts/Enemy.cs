@@ -7,13 +7,13 @@ public class Enemy : MonoBehaviour
     private Spell spell;
     private float spellDamage;
     [SerializeField]
-    private int expPoints;
+    private float expPoints;
     private Player attacker;
     public float HealthAmout { get; set; }
     // Start is called before the first frame update
     void Start()
     {
-        expPoints = 50;
+        expPoints = 50f;
         HealthAmout = 1;
     }
 
@@ -29,8 +29,7 @@ public class Enemy : MonoBehaviour
 
             if (HealthAmout <= 0) {
                 Destroy(gameObject);
-                attacker.exp += expPoints;
-
+                attacker.ExpDistribution(expPoints);
             }
             Debug.Log("Otrzymano " + spell.Damage + " obrazen");
         }
